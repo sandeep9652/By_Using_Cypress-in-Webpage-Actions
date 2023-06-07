@@ -1,0 +1,80 @@
+
+							Behavior-driven development (BDD)
+							----------------------------------
+=>Behavior-driven development (BDD) is a software development methodology that encourages collaboration between developers, testers, and business stakeholders. 
+=>Cucumber is a popular tool used for BDD, and it provides a framework for creating automated tests that are written in a natural language syntax that is easy for all team members to understand.
+
+The Cucumber framework consists of three main components:
+1. feature files
+2. step definitions
+3.support files
+
+1.Feature files:
+-------------- 
+=>Feature files are written in a natural language format that describes the behavior of the application. 
+=>Each feature file describes a specific feature or functionality of the application and contains a set of scenarios that describe how that feature should behave in   different situations.
+=>The scenarios are written using Given-When-Then syntax and are mapped to step definitions.
+
+2.Step definitions:
+----------------
+=>Step definitions are written in code and define the actions that need to be taken for each step in the scenario. 
+=>Each step in the scenario is mapped to a step definition. Step definitions can interact with the application using Selenium, Appium, or any other testing tool.
+
+3.Support files:
+--------------
+=>Support files contain helper code that is used by step definitions.
+=>They can be used to define global variables, custom functions, or hooks that are executed before or after each scenario.
+
+Here's an example of a feature file in Cucumber:
+------------------------------------------------
+Feature: Login
+  As a user
+  I want to login to the application
+  So that I can access my account
+
+ Scenario: Successful login
+    Given I am on the login page
+    When I enter my email address and password
+    And I click the login button
+    Then I should be redirected to my account page
+
+ Scenario: Unsuccessful login
+    Given I am on the login page
+    When I enter an incorrect email address or password
+    And I click the login button
+    Then I should see an error messag
+
+And here's an example of a step definition in Cucumber:
+--------------------------------------------------------
+
+
+const { Given, When, Then } = require('cucumber');
+const LoginPage = require('../pages/login.page');
+
+Given('I am on the login page', () => {
+  LoginPage.open();
+});
+
+When('I enter my email address and password', () => {
+  LoginPage.enterEmail('test@example.com');
+  LoginPage.enterPassword('password');
+});
+
+When('I enter an incorrect email address or password', () => {
+  LoginPage.enterEmail('incorrect@example.com');
+  LoginPage.enterPassword('incorrectpassword');
+});
+
+When('I click the login button', () => {
+  LoginPage.clickLoginButton();
+});
+
+Then('I should be redirected to my account page', () => {
+  expect(browser.getUrl()).to.equal('https://example.com/account');
+});
+
+Then('I should see an error message', () => {
+  expect(LoginPage.getErrorMessage()).to.equal('Incorrect email or password');
+});
+
+This step definition interacts with a login page object to perform the actions described in the scenario, and then uses assertions to verify that the expected result was achieved.

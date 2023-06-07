@@ -1,0 +1,186 @@
+What is Cucumber Feature File & Step Definition? (Example)
+
+For every cucumber project there is a single directory at the root of the project named “features“. This is where all of your cucumber features will reside. In this directory you will find additional directories, which is step_definition and support directories
+
+What is “Feature File”?
+------------------------
+Features file contain high level description of the Test Scenario in simple language. It is known as Gherkin. Gherkin is a plain English text language
+
+Cucumber Feature File consist of following components –
+-------------------------------------------------------
+
+Feature: A feature would describe the current test script which has to be executed.
+Scenario: Scenario describes the steps and expected outcome for a particular test case.
+Scenario Outline: Same scenario can be executed for multiple sets of data using scenario outline. The data is provided by a tabular structure separated by (I I).
+Given: It specifies the context of the text to be executed. By using datatables “Given”, step can also be parameterized.
+When: “When” specifies the test action that has to performed
+Then: The expected outcome of the test can be represented by “Then”
+Next, we will learn how to write Feature File in Cucumber with example.
+
+Sample Feature File Example:
+-----------------------------
+Feature: Visit career guide page in career.guru99.com
+Scenario: Visit career.guru99.com
+Given: I am on career.guru99.com
+When: I click on career guide menu
+Then: I should see career guide page
+
+What is “Step Definition”?
+---------------------------
+Step definition maps the Test Case Steps in the feature files(introduced by Given/When/Then) to code. It which executes the steps on Application Under Test and checks the outcomes against expected results. For a step definition to be executed, it must match the given component in a feature. Step definition is defined in ruby files under “features/step_definitions/*_steps.rb”.
+
+Example for Step Definition:
+----------------------------
+ Here we will use above Cucumber Feature File example of browsing career.guru99.com do We will use features like “When, Then, Given ” as shown in the below Cucumber Feature File examples.
+
+Step 1:
+-------
+Given (/^ I am on career.guru99.com$/) do
+
+Browser.goto "http://career.guru99.com" -This will visit career.guru99 on browser
+
+end
+
+Step 2:
+-------
+When (/^ click on career guide menu$/) do
+
+Browser.text (:name, " career guide" ).click – This will click "career guide menu"
+
+end
+	
+Step 3:
+-------
+
+Then (/^ I should see career guide page$/) do
+
+Browser.goto "http://career.guru99.com/category/career-guide/" - It will visit "career guide page"
+
+end
+Summary:
+--------
+You need 2 Files – Features and Step Definition to execute a Cucmber test scenario
+Features file contain high level description of the Test Scenario in simple language
+Steps Definition file contains the actual code to execute the Test Scenario in the Features file.
+
+
+Important Terms used in Gherkin
+---------------------------------
+Feature
+Background
+Scenario
+Given
+When
+Then
+And
+But
+Scenario Outline Examples
+---------------------------
+The naming convention is used for feature name. However, there is no set rules in Cucumber about names.
+
+Feature:
+--------
+The file should have extension .feature and each feature file should have only one feature. The feature keyword being with the Feature: and after that add, a space and name of the feature will be written.
+
+Scenario:
+----------
+Each feature file may have multiple scenarios, and each scenario starts with Scenario: followed by scenario name.
+
+Background:
+-----------
+Background keyword helps you to add some context to the scenario. It can contain some steps of the scenario, but the only difference is that it should be run before each scenario.
+
+Given:
+------
+The use of Given keyword is to put the system in a familiar state before the user starts interacting with the system. However, you can omit writing user interactions in Given steps if Given in the “Precondition” step.
+
+Syntax:
+-------
+
+Given
+-----
+Given - a test step that defines the 'context
+Given I am on "/."
+When:
+-----
+When the step is to define action performed by the user.
+
+Syntax:
+
+When
+A When - a test step that defines the 'action' performed
+When I perform "Sign In."
+Then:
+The use of ‘then’ keyword is to see the outcome after the action in when step. However, you can only verify noticeable changes.
+
+Syntax:
+
+ Then
+Then - test step that defines the 'outcome.'
+Then I should see "Welcome Tom."
+
+And & But
+You may have multiple given when or Then.
+
+Syntax:
+
+But
+A But - additional test step which defines the 'action' 'outcome.'
+But I should see "Welcome Tom."
+And - additional test step that defines the 'action' performed
+And I write  "EmailAddress" with "Tomjohn@gmail.com."
+Given, When, Then, and, but are test steps. You can use them interchangeably. The interpreter doesn’t display any error. However, they will surely not make any ‘sense’ when read.
+
+Important Terms used in Gherkin
+Important Terms used in Gherkin
+
+Given The login page is opening
+When I input username, password and click the Login button 
+Then I am on the Homepage
+Gherkin Examples
+Example 1:
+
+Feature:  Login functionality of social networking site Facebook. 
+Given:  I am a facebook user. 
+When: I enter username as username. 
+And I enter the password as the password 
+Then I should be redirected to the home page of facebook 
+The scenario mentioned above is of a feature called user login.
+
+All the words written in bold are Gherkin keywords.
+
+Gherkin will analyze each step written in the step definition file. Therefore, the steps are given in the feature file and the step definition file should match.
+
+Example 2:
+
+Feature: User Authentication Background:
+Given the user is already registered to the website Scenario:
+Given the user is on the login page
+When the user inputs the correct email address
+And the user inputs the correct password
+And the user clicks the Login button
+Then the user should be authenticated
+And the user should be redirected to their dashboard
+And the user should be presented with a success message 
+Best practices of using Gherkin
+Each scenario should execute separately
+Every feature should able to be executed along
+Steps information should be shown independently
+Connect your Scenario’s with your requirements
+Keep a complete track of what scenarios should be included in a requirement document
+Create modular and easy to understand steps
+Try to combine all your common scenarios
+Advantages of Gherkin
+Gherkin is simple enough for non-programmers to understand
+Programmers can use it as a very solid base to start their tests
+It makes User Stories easier to digest
+Gherkin script can easily understand by business executives and developers
+Gherkin Testing targets the business requirements
+A significant proportion of the functional specifications is written as user stories
+You don’t need to be expert to understand the small Gherkin command set
+Gherkin Test cases link acceptance tests directly to automated tests
+Style of writing tests cases are easier to reuse code in other tests
+Disadvantages of Gherkin
+It requires a high level of business engagement and collaborations
+May not work well in all scenarios
+Poorly written tests can easily increase test-maintenance cost
